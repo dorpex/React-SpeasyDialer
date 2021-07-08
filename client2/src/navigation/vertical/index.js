@@ -1,7 +1,6 @@
 import { Mail, Home , PlusCircle , TrendingUp } from 'react-feather'
 import { useDispatch , useSelector } from 'react-redux'
 import { store } from '../../redux/storeConfig/store'
-console.log(JSON.parse(store.getState('lead').auth.userData).rank);
 let menu = [
   {
     id: 'Home',
@@ -16,7 +15,7 @@ let menu = [
     navLink: '/second-page'
   }
 ]
-const userRank = JSON.parse(store.getState('lead').auth.userData).rank
+const userRank = JSON.parse(store.getState('lead').auth.userData) ? JSON.parse(store.getState('lead').auth.userData).rank : null
 // const rank = useSelector(state => state.todos)
 export const mySideBar = (rank) => {
   return menu
