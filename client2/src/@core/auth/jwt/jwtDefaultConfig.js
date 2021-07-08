@@ -1,5 +1,5 @@
 // ** Auth Endpoints
-let domain = location.host === 'localhost:3000' ? 'localhost:9000': `165.227.148.234:9000`
+const domain = location.host === 'localhost:3000' ? 'localhost:9000': `165.227.148.234:9000`
 export default {
   loginEndpoint:  `http://${domain}/users/login/submit` ,
   registerEndpoint: `http://${domain}/users/register/submit`,
