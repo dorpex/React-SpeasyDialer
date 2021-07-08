@@ -50,7 +50,7 @@ const Dispatcher = () => {
 }
 
 // ** Lazy load app
-const LazyApp = lazy(() => import('./App'))
+const LazyApp = lazy(() => import('./app'))
 ReactDOM.render(
   <Provider store={store}>
       <Dispatcher/>
