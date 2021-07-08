@@ -1,0 +1,17 @@
+export PORT=3000
+export SENDGRID_API_KEY=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
+export DB_URL=mongodb://127.0.0.1:27017/
+export JWT_SECRET=thisisme
+export PROJECT_NAME=video-test
+cd /var/www/video-test
+nodemon --ignore '/var/www/video-test/public/plugins' -e js,hbs,html,css,json src/index.js
+
+
+eval `ssh-agent -s`
+ssh-add ~/.ssh/github
+cd /var/www/video-test 
+
+pm2 logs --lines 1000
+
+
+sudo kill -9 `sudo lsof -t -i:3000`   

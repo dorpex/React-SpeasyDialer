@@ -1,0 +1,18 @@
+.my-select-button{
+    border-radius: 0.358rem !important;
+}
+
+.dropdown-menu {
+    margin-left: 1rem !important;
+}
+
+.Toastify__toast-body , .Toastify__close-button svg{
+    color: white !important;
+}
+
+.Toastify__toast .Toastify__close-button svg{
+    fill: white !important;
+    height: 1rem;
+    width: 1rem;
+}
+
