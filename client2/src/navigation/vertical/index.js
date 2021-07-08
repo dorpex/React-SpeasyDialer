@@ -54,7 +54,7 @@ const markting = [
   }
 ]
 
-menu = userRank === 'נציג' ?  nazig : userRank === 'משווק' ? markting : userRank === 'מנהל מכירות' ? salesManager : undefined
+menu = userRank === 'נציג' ?  nazig : userRank === 'משווק' ? markting : userRank === 'מנהל מכירות' ? salesManager : menu
 
 if (userRank   === 'מנהל') {
   menu = [...nazig , ...salesManager, ...markting]
