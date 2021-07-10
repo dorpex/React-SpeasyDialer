@@ -154,7 +154,7 @@ const LoginV1 = () => {
                 placeholder='נא לבחור אימייל'
                 onChange={e => setEmail(e.target.value)}
                 innerRef={register({ required: true, validate: value => value !== '' })}
-                hebrewName ="אימייל"
+                hebrewname ="אימייל"
                 />
               </FormGroup>
 
@@ -175,7 +175,7 @@ const LoginV1 = () => {
                 placeholder='נא לבחור סיסמא'
                 onChange={e => setPassword(e.target.value)}
                 innerRef={register({ required: true, validate: value => value !== '' })}
-                hebrewName ="סיסמא"
+                hebrewname ="סיסמא"
                 className='input-group-merge'
                 />
               </FormGroup>

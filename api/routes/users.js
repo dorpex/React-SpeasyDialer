@@ -19,6 +19,7 @@ router.post('/register/submit',async function(req, res, next) {
 });
 // Login 
 router.post('/login/submit',async function(req, res, next) {
+
   User.findOne({ $and : [ { email : req.body.email } , { password : req.body.password } ] })
   .then(user => {
     if (user.length == 0) {
@@ -29,7 +30,7 @@ router.post('/login/submit',async function(req, res, next) {
   })
   .catch(error => {
   });
-  console.log(req.body.email);
+ 
 
 });
 
