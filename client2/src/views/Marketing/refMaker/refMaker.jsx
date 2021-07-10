@@ -14,7 +14,7 @@ import { toast } from 'react-toastify'
 import Avatar from '@components/avatar'
 import './components/style.css'
 import moment from 'moment'
-
+import { domain } from '../../../utility/Utils'
 
 
 const refMaker = () => {
@@ -28,7 +28,7 @@ const refMaker = () => {
 
     useEffect(() => {
         const firstRun = async () => {
-            const dbData = await  fetch('http://localhost:9000/marketing/refmaker/get-data' , {
+            const dbData = await  fetch(`http://${domain}/marketing/refmaker/get-data` , {
                 method : 'POST',
                 headers: {
                     'Accept': 'application/json',

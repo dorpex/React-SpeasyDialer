@@ -77,3 +77,5 @@ export const selectThemeColors = theme => ({
     neutral30: '#ededed' // for input hover border-color
   }
 })
+
+export const domain = location.host === 'localhost:3000' ? 'localhost:9000': `165.227.148.234:9000`
