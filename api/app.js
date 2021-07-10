@@ -58,11 +58,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-console.log(1);
 
-setTimeout(() => {
-  console.log(2);
-},  5000);
 module.exports = app;
 
 // fetch('http://165.227.148.234:9000/leads/new-lead', {method : 'POST' })
