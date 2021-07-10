@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var marketingRouter = require('./routes/marketing');
+var leadsRouter = require('./routes/leads');
 
 require('./models/lead')
 const ListDb = require('./models/list')
@@ -40,7 +41,7 @@ app.use('/users', usersRouter);
 app.use("/testAPI", testAPIRouter);
 app.use('/user', usersApiRouter)
 app.use('/marketing', marketingRouter)
-
+app.use('/leads' , leadsRouter)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

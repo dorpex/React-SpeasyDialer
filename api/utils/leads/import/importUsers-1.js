@@ -4,8 +4,9 @@ const data = fs.readFileSync('dataBaseJson/agents.json');
 const User = require('../../../models/user')
 let fullData = JSON.parse(data);
 fullData = fullData.filter(user => user.name != '')
-
+let x = 0
 fullData.forEach(userData => {
+    x++ 
     new User({
         oldId : userData.id,
         name : userData.name,
