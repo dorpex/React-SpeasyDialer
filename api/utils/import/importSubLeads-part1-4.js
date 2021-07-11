@@ -59,22 +59,22 @@ Product.find({})
 })
 .then( async () => {
     let fullData = JSON.parse(data);
+    let fullData = fullData.filter(( data , i ) => i >= 200000)
     let allFullData = []
-    var i,j,chunk = 10000;
-    await insertUsers(fullData.slice(i,i+chunk))
+    var i,j,chunk = 50000;
+    
     for (i=0,j=fullData.length; i<j; i+=chunk) {
         console.log('start');
-        await insertUsers(fullData.slice(i,i+chunk))
+        
         console.log('finish');
-        // allFullData.push();
+        allFullData.push(fullData.slice(i,i+chunk));
     }
-    // for (const key in allFullData) {
-    //     fullDataParts = allFullData[key]
-    //     y++
-    //     // console.log('y - ' + y);
-       
-    // }
-
+    for (const key in allFullData) {
+        fullDataParts = allFullData[key]
+        y++
+        await insertUsers()
+        console.log('y - ' + y);
+    }
 })
 
 
@@ -82,14 +82,6 @@ Product.find({})
 const insertUsers = (fullData) => { 
     let z = 0
     return new Promise(async (resolve, reject) => {
-        
-        Lead.count({}, function( err, count){
-            leadsCounter = count
-            console.log( "Number of leads:", count );
-        })
-        SubLead.count({}, function( err, count){
-            console.log( "Number of subLead:", count );
-        })
         subLeadsList = await SubLead.find({})
         subLeadsList.map((item) => {
             subLeadsObject[item.oldId] = item
@@ -108,11 +100,9 @@ const insertUsers = (fullData) => {
             let newSubLead = subLeadsObject[subLeadData.id]
             
             if (!newSubLead) {
-                // console.log(subLeadData);
                 newSubLead = {}
                 
                 if ( leadsObject[`${subLeadData.email}-${subLeadData.phone}-${subLeadData.product}`]  != undefined ) {
-                    // console.log(leadsObject[`${subLeadData.email}-${subLeadData.phone}-${subLeadData.product}`]);
                     masterLead = leadsObject[`${subLeadData.email}-${subLeadData.phone}-${subLeadData.product}`]
                     newSubLead.masterLeadMyId = leadsObject[`${subLeadData.email}-${subLeadData.phone}-${subLeadData.product}`].myId
                 }
