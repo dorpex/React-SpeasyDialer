@@ -10,11 +10,11 @@ let x = 0
 let y = 0
 let leadsCounter 
 
-setInterval(() => {
-    SubLead.find({}).then(e => {
-        console.log('number of leads - ',e.length);
-    })
-}, 2500);
+// setInterval(() => {
+//     SubLead.find({}).then(e => {
+//         console.log('number of leads - ',e.length);
+//     })
+// }, 2500);
 SubLead.find({}).then(async e => {
     console.log(e);
     for (const key in e) {
