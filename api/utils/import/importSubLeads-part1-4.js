@@ -17,7 +17,7 @@ let leadsCounter
 // }, 30000);
 SubLead.find({}).then(async e => {
     // console.log(e.length);
-    console.log(e.length);
+    console.log(`subleads - ${e.length}`);
     for (const key in e) {
         let item = e[key]
         // x++ 
@@ -26,6 +26,16 @@ SubLead.find({}).then(async e => {
     }
 })
 
+Lead.find({}).then(async e => {
+    // console.log(e.length);
+    console.log(`leads - ${e.length}`);
+    for (const key in e) {
+        let item = e[key]
+        // x++ 
+        await item.remove()
+        // console.log(x);
+    }
+})
 
 
 
