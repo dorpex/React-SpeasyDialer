@@ -11,21 +11,21 @@ let leadsCounter
 let masterLeadObject = new Object()
 let subLeadObject = new Object()
 
-Lead.find({})
-.then(async e => {
-    console.log(e.length);
-    for (const key in e) {
-        e[key].remove()
-    }
-})
+// Lead.find({})
+// .then(async e => {
+//     console.log(e.length);
+//     for (const key in e) {
+//         e[key].remove()
+//     }
+// })
 
-SubLead.find({})
-.then(async e => {
-    console.log('SubLead - ' , e.length);
-    for (const key in e) {
-        e[key].remove()
-    }
-})
+// SubLead.find({})
+// .then(async e => {
+//     console.log('SubLead - ' , e.length);
+//     for (const key in e) {
+//         e[key].remove()
+//     }
+// })
 
 const startSync = async () => {
     let fullData = JSON.parse(data);
@@ -146,4 +146,4 @@ const insertUsers = (fullData) => {
     
 }
 
-// startSync()
+startSync()
