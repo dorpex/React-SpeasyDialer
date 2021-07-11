@@ -15,7 +15,7 @@ let leadsCounter
 //         console.log('number of leads - ',e.length);
 //     })
 // }, 30000);
-SubLead.find({}).then(async e => {
+Lead.find({}).then(async e => {
     console.log(e);
     for (const key in e) {
         let item = e[key]
