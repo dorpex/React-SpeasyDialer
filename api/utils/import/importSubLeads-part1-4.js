@@ -62,14 +62,15 @@ Product.find({})
     let allFullData = []
     var i,j,chunk = 10000;
     for (i=0,j=fullData.length; i<j; i+=chunk) {
-        allFullData.push(fullData.slice(i,i+chunk));
+        await insertUsers(fullData.slice(i,i+chunk))
+        // allFullData.push();
     }
-    for (const key in allFullData) {
-        fullDataParts = allFullData[key]
-        y++
-        // console.log('y - ' + y);
-        await insertUsers(fullDataParts)
-    }
+    // for (const key in allFullData) {
+    //     fullDataParts = allFullData[key]
+    //     y++
+    //     // console.log('y - ' + y);
+       
+    // }
 
 })
 
