@@ -62,11 +62,13 @@ Product.find({})
     let allFullData = []
     var i,j,chunk = 10000;
     await insertUsers(fullData.slice(i,i+chunk))
-    console.log('finish');
-    // for (i=0,j=fullData.length; i<j; i+=chunk) {
-    //     // await insertUsers(fullData.slice(i,i+chunk))
-    //     // allFullData.push();
-    // }
+    for (i=0,j=fullData.length; i<j; i+=chunk) {
+        console.log('start');
+        await insertUsers(fullData.slice(i,i+chunk))
+        console.log('finish');
+
+        // allFullData.push();
+    }
     // for (const key in allFullData) {
     //     fullDataParts = allFullData[key]
     //     y++
@@ -172,19 +174,19 @@ const insertUsers = (fullData) => {
                     }
                     let newMasterLead = await Lead.findOne({'myId' : masterLead.myId})
                     !newMasterLead.subLeadsOldIds.includes(subLeadData.id) ? newMasterLead.subLeadsOldIds.push(subLeadData.id) : undefined
-                    newMasterLead.save()
+                    await newMasterLead.save()
                 }
                 newSubLeadsArray.push(newSubLead)
             }
 
         }
         // console.log(Object.values(leadsArray));
-        await SubLead.insertMany(newSubLeadsArray, { ordered: false }).catch(e => console.log(e)) 
+        await SubLead.InsertManyAsync(newSubLeadsArray, { ordered: false }).catch(e => console.log(e)) 
         // Object.values(leadsArray).forEach((item) => {
         //     let newItem = new Lead(item)
         //     newItem.save()
         // })
-        await Lead.insertMany(Object.values(leadsArray), { ordered: false }).catch(e => console.log(e))
+        await Lead.InsertManyAsync(Object.values(leadsArray), { ordered: false }).catch(e => console.log(e))
         // newSubLeadsArray.length > 0 ? new SubLead.insertMany(newSubLeadsArray, { ordered: false }) : undefined
 
         resolve()
