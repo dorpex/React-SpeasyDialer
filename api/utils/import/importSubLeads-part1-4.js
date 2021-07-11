@@ -10,28 +10,31 @@ let x = 0
 let y = 0
 let leadsCounter 
 
-SubLead.find({}).then(e => {
-    console.log(e);
-    e.forEach((item)=> {
-        x++ 
-        item.remove()
-        console.log(x);
-    })
-    console.log(e);
-})
+// SubLead.find({}).then(e => {
+//     console.log(e);
+//     e.forEach((item)=> {
+//         x++ 
+//         item.remove()
+//         console.log(x);
+//     })
+//     console.log(e);
+// })
 
-Lead.find({}).then(e => {
-    console.log(e);
-    e.forEach((item)=> {
-        x++ 
-        item.remove()
-        console.log(x);
-    })
-    console.log(e);
-})
 setInterval(() => {
     console.log('number of leads - ',Lead.find({}).count());
 }, 2500);
+
+
+Lead.find({}).then(async e => {
+    console.log(e);
+    for (const key in e) {
+        let item = e[key]
+        x++ 
+        await item.remove()
+        console.log(x);
+    }
+    console.log(e);
+})
 
 // let testProducts , test2Products = {} , lists = new Array() , listsObject = {}, subLeadsList , subLeadsObject = new Object()
 // let leadsList , leadsObject = new Object
