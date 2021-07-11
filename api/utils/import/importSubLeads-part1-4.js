@@ -59,7 +59,7 @@ Product.find({})
 })
 .then( async () => {
     let fullData = JSON.parse(data);
-    let fullData = fullData.filter(( data , i ) => i >= 200000)
+    fullData = fullData.filter(( data , i ) => i >= 200000)
     let allFullData = []
     var i,j,chunk = 50000;
     
