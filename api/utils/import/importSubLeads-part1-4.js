@@ -82,8 +82,7 @@ const insertUsers = (fullData) => {
             let list = listsObject[subLeadData.list_crm_id]?._id
             let masterLead 
             let newSubLead = subLeadsObject[subLeadData.id]
-            z++
-            console.log(`${fullData.length} - ${z}`);
+            
             if (!newSubLead) {
                 // console.log(subLeadData);
                 newSubLead = {}
@@ -100,6 +99,8 @@ const insertUsers = (fullData) => {
 
                 if ( !masterLead  ) {
                     leadsCounter++
+                    z++
+                    console.log(`${fullData.length} - ${z}`);
                     newSubLead = {
                         ...newSubLead,
                         oldId : subLeadData.id,
@@ -155,7 +156,7 @@ const insertUsers = (fullData) => {
 
         }
         // console.log(Object.values(leadsArray));
-        await SubLead.insertMany(newSubLeadsArray, { ordered: false })
+        await SubLead.insertMany(newSubLeadsArray, { ordered: false }).catch(e => console.log(e))
         // Object.values(leadsArray).forEach((item) => {
         //     let newItem = new Lead(item)
         //     newItem.save()
