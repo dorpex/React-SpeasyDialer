@@ -56,6 +56,7 @@ Product.find({})
 
 
 const insertUsers = (fullData) => { 
+    let z = 0
     return new Promise(async (resolve, reject) => {
         
         Lead.count({}, function( err, count){
@@ -81,8 +82,8 @@ const insertUsers = (fullData) => {
             let list = listsObject[subLeadData.list_crm_id]?._id
             let masterLead 
             let newSubLead = subLeadsObject[subLeadData.id]
-            
-            
+            z++
+            console.log(`${fullData.length} - ${z}`);
             if (!newSubLead) {
                 // console.log(subLeadData);
                 newSubLead = {}
