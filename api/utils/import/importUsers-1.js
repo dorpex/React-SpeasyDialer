@@ -20,4 +20,5 @@ fullData.forEach(userData => {
         : userData.rank == 5 ? 'מנהל' : undefined,
         published : userData.published == 1 ? true : false
     }).save()
+    console.log(`${fullData.length} - ${x}`);
 });
