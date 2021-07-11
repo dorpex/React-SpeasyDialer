@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-require('./utils/import/importLists-3')
+require('./utils/import/importSubLeads-part1-4')
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const marketingRouter = require('./routes/marketing');
