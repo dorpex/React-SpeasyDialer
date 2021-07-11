@@ -1,11 +1,11 @@
 const csv = require('csv-parser')
 const fs = require('fs')
 const data = fs.readFileSync('dataBaseJson/leads.json');
-const SubLead = require('../../../models/subLead')
-const Product = require('../../../models/product')
-const List = require('../../../models/list')
-const Lead = require('../../../models/lead')
-const User = require('../../../models/user')
+const SubLead = require('../../models/subLead')
+const Product = require('../../models/product')
+const List = require('../../models/list')
+const Lead = require('../../models/lead')
+const User = require('../../models/user')
 let x = 0 
 let y = 0
 let leadsCounter 
