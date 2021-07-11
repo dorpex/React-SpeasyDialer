@@ -1,7 +1,7 @@
 const csv = require('csv-parser')
 const fs = require('fs')
 const data = fs.readFileSync('dataBaseJson/products.json');
-const Product = require('../../../models/product')
+const Product = require('../../models/product')
 let fullData = JSON.parse(data);
 // fullData = fullData.filter(user => user.name != '')
 let x = 0
