@@ -16,6 +16,14 @@ const SubLeadSchema =  mongoose.Schema({
         ref: 'Product',
         default : null
     },
+    phone : {
+        type : String,
+        default : null
+    },
+    email : {
+        type : String,
+        default : null
+    },
     masterLead : {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Lead',
@@ -27,7 +35,8 @@ const SubLeadSchema =  mongoose.Schema({
         default : null
     },
     masterLeadMyId : {
-        type : Number
+        type : Number,
+        default : null
     }
 
 },
@@ -36,13 +45,13 @@ const SubLeadSchema =  mongoose.Schema({
 })
 
 
-SubLeadSchema.pre('save', function(error, doc, next) {
-    if (error.name === 'MongoError' && error.code === 11000) {
-      next(new Error('There was a duplicate key error'));
-    } else {
-      next();
-    }
-});
+// SubLeadSchema.pre('save', function(error, doc, next) {
+//     if (error.name === 'MongoError' && error.code === 11000) {
+//       next(new Error('There was a duplicate key error'));
+//     } else {
+//       next();
+//     }
+// });
 
 
 
