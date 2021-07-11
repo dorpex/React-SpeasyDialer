@@ -66,7 +66,6 @@ Product.find({})
         console.log('start');
         await insertUsers(fullData.slice(i,i+chunk))
         console.log('finish');
-
         // allFullData.push();
     }
     // for (const key in allFullData) {
@@ -181,12 +180,12 @@ const insertUsers = (fullData) => {
 
         }
         // console.log(Object.values(leadsArray));
-        await SubLead.InsertMany(newSubLeadsArray, { ordered: false }).catch(e => console.log(e)) 
+        await SubLead.insertMany(newSubLeadsArray, { ordered: false }).catch(e => console.log(e)) 
         // Object.values(leadsArray).forEach((item) => {
         //     let newItem = new Lead(item)
         //     newItem.save()
         // })
-        await Lead.InsertMany(Object.values(leadsArray), { ordered: false }).catch(e => console.log(e))
+        await Lead.insertMany(Object.values(leadsArray), { ordered: false }).catch(e => console.log(e))
         // newSubLeadsArray.length > 0 ? new SubLead.insertMany(newSubLeadsArray, { ordered: false }) : undefined
 
         resolve()
