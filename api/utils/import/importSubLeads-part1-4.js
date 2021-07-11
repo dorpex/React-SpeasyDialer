@@ -21,7 +21,9 @@ let leadsCounter
 // })
 
 setInterval(() => {
-    console.log('number of leads - ',Lead.find({}).count());
+    Lead.find({}).then(e => {
+        console.log('number of leads - ',e.length);
+    })
 }, 2500);
 
 
