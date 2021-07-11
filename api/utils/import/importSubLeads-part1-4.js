@@ -10,11 +10,11 @@ let x = 0
 let y = 0
 let leadsCounter 
 
-setInterval(() => {
-    Lead.find({}).then(e => {
-        console.log('number of leads - ',e.length);
-    })
-}, 30000);
+// setInterval(() => {
+//     Lead.find({}).then(e => {
+//         console.log('number of leads - ',e.length);
+//     })
+// }, 30000);
 // SubLead.find({}).then(async e => {
 //     console.log(e);
 //     for (const key in e) {
@@ -60,7 +60,7 @@ Product.find({})
 .then( async () => {
     let fullData = JSON.parse(data);
     let allFullData = []
-    var i,j,chunk = 50000;
+    var i,j,chunk = 10000;
     for (i=0,j=fullData.length; i<j; i+=chunk) {
         allFullData.push(fullData.slice(i,i+chunk));
     }
