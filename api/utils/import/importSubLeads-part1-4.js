@@ -59,7 +59,7 @@ Product.find({})
 })
 .then( async () => {
     let fullData = JSON.parse(data);
-    fullData = fullData.filter(( data , i ) => 0 <= i >= 100000)
+    fullData = fullData.filter(( data , i ) => 0 <= i <= 100000)
     let allFullData = []
     var i,j,chunk = 50000;
     
