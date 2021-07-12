@@ -76,7 +76,8 @@ const LeadSchema =  mongoose.Schema({
     myId: {
         type : String,
         unique : true
-    }
+    },
+
 },
 {
     timestamps: true,
