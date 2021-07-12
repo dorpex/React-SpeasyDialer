@@ -10,7 +10,7 @@ const User = require('../../models/user')
 let leadsCounter 
 let masterLeadObject = new Object()
 let subLeadObject = new Object()
-Lead.collection.drop()
+// Lead.collection.drop()
 Lead.find({})
 .then(async e => {
     console.log(e.length);
