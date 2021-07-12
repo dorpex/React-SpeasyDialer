@@ -2,15 +2,31 @@ const mongoose = require('mongoose');
 const autoIncrement = require('mongoose-auto-increment');
 const moment = require('moment')
 
+const SubLeadSchema =  mongoose.Schema({
+    ad: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Ad',
+        default : null
+    },
+    list : {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'List',
+        default : null
+    },
+    createdAt : {
+        type: Date, 
+    },
+},
+{
+    timestamps: true,
+})
+
 const LeadSchema =  mongoose.Schema({
     name: {
         type: String,
     },
     subLeads: [
-        {
-            type: mongoose.Schema.Types.ObjectId, 
-            ref: 'Product' 
-        }
+        SubLeadSchema
     ],
     subLeadsOldIds: [
        
@@ -43,17 +59,6 @@ const LeadSchema =  mongoose.Schema({
         type : String,
         default : ''
     },
-    firstSubLeadWithAd : {
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'SubLead' 
-    },
-    lastSubLeadWithAd : {
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'SubLead' 
-    },
-    firstSubLeadWithAdOldId : {
-        type : String 
-    },
     leadsActivity: [
         {
             type: mongoose.Schema.Types.ObjectId, 
@@ -67,10 +72,6 @@ const LeadSchema =  mongoose.Schema({
     comments : {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Comment' 
-    },
-    myId : {
-        type : String,
-        unique : true
     }
 },
 {

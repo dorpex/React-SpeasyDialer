@@ -10,7 +10,7 @@ const User = require('../../models/user')
 let leadsCounter 
 let masterLeadObject = new Object()
 let subLeadObject = new Object()
-
+Lead.collection.drop()
 Lead.find({})
 .then(async e => {
     console.log(e.length);
@@ -31,16 +31,16 @@ const startSync = async () => {
     let fullData = JSON.parse(data);
 
 
-    var i,j,chunk = 1000;
+    var i,j,chunk = 10000;
     
     leadsCounter = await Lead.find({})
     .then(e => {
         return e ? e.length : 0
     })
-    //  for (i=0,j=fullData.length; i<j; i+=chunk) {
-    //     await insertUsers(fullData.slice(i,i+chunk))
-    // }
-    insertUsers(fullData)
+     for (i=0,j=fullData.length; i<j; i+=chunk) {
+       newInsert(fullData.slice(i,i+chunk))
+    }
+    // newInsert(fullData)
 }
 
 const insertUsers = (fullData) => { 
@@ -145,5 +145,111 @@ const insertUsers = (fullData) => {
     })
     
 }
+let x = 0
+const newInsert = async (fullData) => {
+    for (const key in fullData) {
+        let lead = fullData[key]
+        
+        if ((lead.product != null && lead.product != '') && ( (lead.phone != null && lead.phone != '') || (lead.email != null && lead.email != '') ) ) {
+            var start = new Date().getTime();
+            let product = await Product.findOne({ oldId : lead.product }).select('_id')
+            product = product ? product._id : null
 
-// startSync()
+            let list = await List.findOne({crm_id : lead.list_crm_id}).select('_id')
+            list = list ? list._id : null
+            let status = await getStatus(lead.status)
+
+            await Lead.findOneAndUpdate(
+            // filter
+            {
+                $and : [ 
+                    { phone : lead.phone },
+                    { product },
+                    { email : lead.email }
+                ]
+            },
+            // update
+            {
+                product : product ? product : null,
+                name : lead.name,
+                hotlist : list ? list.type == 3 ? true : false : undefined,
+                email : lead.email,
+                phone : lead.phone,
+                product : product ? product._id : null,
+                status : lead.status == 8 ? 'טופל נסגרה עסקה' : status,
+                gold : lead.gold == 0 ? false : true,
+                lastLeadDate : moment(lead.created_at),
+                $addToSet : {'subLeads' : { list , createdAt : lead.created_at }}
+            }, 
+            // settings
+            {
+                new: true,
+                upsert: true // Make this update into an upsert
+            })
+            var end = new Date().getTime();
+            var time = end - start;
+            x++
+            console.log(`${time} - ${x}`);
+        }
+    }
+    
+}
+
+const getStatus = (status) => {
+
+
+    let newStatus = new String()
+
+    switch (Number(status)) {
+        case 1:
+            newStatus = 'חדש' 
+            break;
+        case 2:
+            newStatus = 'אין מענה'
+        break;
+        case 3:
+            newStatus = 'בהמתנה'
+            break;
+        case 4:
+            newStatus = 'בטיפול'
+        break;
+        case 5:
+            newStatus = 'בהמתנה אין מענה'
+            break;
+        case 6:
+            newStatus = 'בטיפול אין מענה'
+        break;
+        case 7:
+            newStatus = 'טופל אין עסקה'
+            break;
+        case 8:
+            newStatus = 'טופל נסגרה עסקה'
+        break;
+        case 9:
+            newStatus = 'לא רלוונטי'
+            break;
+        case 10:
+            newStatus = 'לא תקין'
+        break;
+        case 11:
+            newStatus = 'נשלח וואטס אפ'
+            break;
+        case 12:
+            newStatus = 'כבר לקוח'
+        break;
+        case 13:
+            newStatus = 'שמירת מקום'
+            break;
+        case 14:
+            newStatus = 'אפ סייל'
+        break;
+        case 15:
+            newStatus = 'תקועה'
+            break;
+        default:
+            newStatus = undefined
+            break;
+    }
+    return newStatus
+}
+startSync()
