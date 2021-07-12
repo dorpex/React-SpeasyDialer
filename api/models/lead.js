@@ -72,6 +72,10 @@ const LeadSchema =  mongoose.Schema({
     comments : {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Comment' 
+    },
+    myId: {
+        type : String,
+        unique : true
     }
 },
 {

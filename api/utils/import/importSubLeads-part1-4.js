@@ -10,7 +10,7 @@ const User = require('../../models/user')
 let leadsCounter 
 let masterLeadObject = new Object()
 let subLeadObject = new Object()
-// Lead.collection.drop()
+Lead.collection.drop()
 Lead.find({})
 .then(async e => {
     console.log(e.length);
@@ -31,7 +31,7 @@ const startSync = async () => {
     let fullData = JSON.parse(data);
 
 
-    var i,j,chunk = 10000;
+    var i,j,chunk = 10;
     
     leadsCounter = await Lead.find({})
     .then(e => {
@@ -150,7 +150,7 @@ const newInsert = async (fullData) => {
     for (const key in fullData) {
         let lead = fullData[key]
         
-        if ((lead.product != null && lead.product != '') && ( (lead.phone != null && lead.phone != '') || (lead.email != null && lead.email != '') ) ) {
+        if ((lead.product != null && lead.product != '') && ( lead.phone != null && lead.phone != '' || lead.email != null && lead.email != '' ) ) {
             var start = new Date().getTime();
             let product = await Product.findOne({ oldId : lead.product }).select('_id')
             product = product ? product._id : null
@@ -162,11 +162,7 @@ const newInsert = async (fullData) => {
             await Lead.findOneAndUpdate(
             // filter
             {
-                $and : [ 
-                    { phone : lead.phone },
-                    { product },
-                    { email : lead.email }
-                ]
+                myId : `${lead.product}${lead.phone}${lead.email}`
             },
             // update
             {
@@ -174,12 +170,13 @@ const newInsert = async (fullData) => {
                 name : lead.name,
                 hotlist : list ? list.type == 3 ? true : false : undefined,
                 email : lead.email,
-                phone : lead.phone,
+                phone : lead.phone == '' ? null : lead.phone,
                 product : product ? product._id : null,
-                status : lead.status == 8 ? 'טופל נסגרה עסקה' : status,
+                status : this.status == 'טופל נסגרה עסקה' ? 'טופל נסגרה עסקה' : status,
                 gold : lead.gold == 0 ? false : true,
                 lastLeadDate : moment(lead.created_at),
-                $addToSet : {'subLeads' : { list , createdAt : lead.created_at }}
+                $addToSet : {'subLeads' : { list , createdAt : lead.created_at }},
+                myId : `${lead.product}${lead.phone}${lead.email}`
             }, 
             // settings
             {
