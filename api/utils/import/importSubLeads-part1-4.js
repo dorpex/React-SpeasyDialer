@@ -150,7 +150,7 @@ const newInsert = async (fullData) => {
     for (const key in fullData) {
         let lead = fullData[key]
         
-        if ((lead.product != null && lead.product != '') && ( lead.phone != null && lead.phone != '' || lead.email != null && lead.email != '' ) ) {
+        if ((lead.product != null && lead.product != '') && ( ( lead.phone != null && lead.phone != '' ) || ( lead.email != null && lead.email != '' ) ) ) {
             var start = new Date().getTime();
             let product = await Product.findOne({ oldId : lead.product }).select('_id')
             product = product ? product._id : null
